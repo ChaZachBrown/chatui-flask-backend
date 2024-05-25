@@ -1,6 +1,6 @@
 # Custom ChatUI Backend
 
-This repository contains the backend services designed to work with the custom Huggingface ChatUI frontend. It includes a Flask application, Celery for handling asynchronous tasks, and Redis as a message broker. The backend serves as an example or a wrapper around an LLM project to interface with the ChatUI.
+This repository contains the backend services designed to work with the custom Huggingface ChatUI frontend. It includes a Flask application, Celery for handling asynchronous tasks, and Redis as a message broker. The backend serves as an example or a wrapper around an LLM project to interface with this custom [ChatUI](https://github.com/ChaZachBrown/chatui-custom-backend).
 
 ## Overview
 
