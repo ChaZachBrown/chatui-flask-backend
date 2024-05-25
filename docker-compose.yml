@@ -1,0 +1,37 @@
+version: '3.11.1'
+
+services:
+  flask:
+    build: .
+    ports:
+      - "5001:5001"
+    networks:
+      - backend-network
+    depends_on:
+      - redis
+    environment:
+      - FLASK_ENV=development
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    command: flask run --host=0.0.0.0 --port=5001
+
+  redis:
+    image: redis:latest
+    networks:
+      - backend-network
+
+  celery:
+    build: .
+    command: celery -A celery_app.celery worker --loglevel=info
+    depends_on:
+      - flask
+      - redis
+    networks:
+      - backend-network
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+networks:
+  backend-network:
+    driver: bridge
